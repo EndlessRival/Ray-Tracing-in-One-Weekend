@@ -22,7 +22,7 @@ namespace RayTracingInOneWeekend
         private void Form1_Load(object sender, System.EventArgs e)
         {
             //
-            this.bmp = Chapter.ch4(this.ClientRectangle.Width, this.ClientRectangle.Height);
+            this.bmp = Chapter.ch5(this.ClientRectangle.Width, this.ClientRectangle.Height);
             /*
             int i, j;
             int w = bmp.Width;
