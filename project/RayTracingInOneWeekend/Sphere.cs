@@ -23,19 +23,19 @@ namespace RayTracingInOneWeekend
             float discriminant = b * b - 4 * a * c;
             if(discriminant > 0)
             {
-                float temp = (-b - (float)Math.Sqrt(discriminant)) / (2 * a);  //  Incorrect code in the book, should divided by 2a NOT a
+                double temp = (-b - Math.Sqrt(discriminant)) / (2 * a);  //  Incorrect code in the book, should divided by 2a NOT a
                 if (t_min <= temp && temp <= t_max)
                 {
-                    rec.t = temp;
-                    rec.p = r.point_at_parameter(temp);
+                    rec.t = (float)temp;
+                    rec.p = r.point_at_parameter((float)temp);
                     rec.normal = (rec.p - center) / radius;
                     return true;
                 }
-                temp = (-b + (float)Math.Sqrt(discriminant)) / (2 * a);  //  Incorrect code in the book, should divided by 2a NOT a
+                temp = (-b + Math.Sqrt(discriminant)) / (2 * a);  //  Incorrect code in the book, should divided by 2a NOT a
                 if (t_min <= temp && temp <= t_max)
                 {
-                    rec.t = temp;
-                    rec.p = r.point_at_parameter(temp);
+                    rec.t = (float)temp;
+                    rec.p = r.point_at_parameter((float)temp);
                     rec.normal = (rec.p - center) / radius;
                     return true;
                 }

@@ -9,6 +9,7 @@ namespace RayTracingInOneWeekend
     class Vector3
     {
         public float[] e = new float[3];
+        public Vector3() { }
         public Vector3(Vector3 v) { e[0] = v.e[0]; e[1] = v.e[1]; e[2] = v.e[2]; }
         public Vector3(float _x, float _y, float _z) { e[0] = _x; e[1] = _y; e[2] = _z; }
 
@@ -69,6 +70,11 @@ namespace RayTracingInOneWeekend
         public static Vector3 cross(Vector3 a, Vector3 b)
         {
             return new Vector3(a.y()*b.z() - a.z()*b.y(), a.x()*b.z()-a.z()*b.x(), a.x()*b.y()-a.y()*b.x());
+        }
+
+        public string toString()
+        {
+            return "(" + e[0] + "," + e[1] + "," + e[2] + ")";
         }
     }
 }
