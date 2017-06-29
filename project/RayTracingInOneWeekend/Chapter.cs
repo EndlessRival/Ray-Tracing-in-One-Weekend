@@ -222,7 +222,8 @@ namespace RayTracingInOneWeekend
 
         private static Vector3 ch7_random_in_unit_sphere()
         {
-            Random rdm = new Random(Guid.NewGuid().GetHashCode());  // should NOT use new Random(), if it is run fast enough then all rdm use the same seed
+            // should NOT use new Random(), if it run fast enough then all rdm use the same seed
+            Random rdm = new Random(Guid.NewGuid().GetHashCode());
             Vector3 p;
             do
             {
@@ -266,7 +267,6 @@ namespace RayTracingInOneWeekend
             for (int j = 0; j < height; ++j)
                 for (int i = 0; i < width; ++i)
                 {
-                    ++allray;
                     col = new Vector3(0, 0, 0);
                     for (int c = 0; c < sampleCount; ++c)
                     {
