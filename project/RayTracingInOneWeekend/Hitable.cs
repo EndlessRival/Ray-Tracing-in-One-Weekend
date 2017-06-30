@@ -11,6 +11,7 @@ namespace RayTracingInOneWeekend
         public float t;
         public Vector3 p;
         public Vector3 normal;
+        public Material mat;
     }
 
     interface Hitable

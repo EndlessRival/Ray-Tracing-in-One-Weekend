@@ -28,6 +28,10 @@ namespace RayTracingInOneWeekend
         {
             return new Vector3(lhs.x() - rhs.x(), lhs.y() - rhs.y(), lhs.z() - rhs.z());
         }
+        public static Vector3 operator -(Vector3 v)
+        {
+            return new Vector3(- v.x(), - v.y(), - v.z());
+        }
         public float this[int i]{ get { return this.e[i]; } set { this.e[i] = value; } }
         public static Vector3 operator /(Vector3 lhs, float t)
         {
@@ -40,6 +44,10 @@ namespace RayTracingInOneWeekend
         public static Vector3 operator *(float t, Vector3 lhs)
         {
             return new Vector3(lhs.x() * t, lhs.y() * t, lhs.z() * t);
+        }
+        public static Vector3 operator *(Vector3 lhs, Vector3 rhs)
+        {
+            return new Vector3(lhs.x() * rhs.x(), lhs.y() * rhs.y(), lhs.z() * rhs.z());
         }
 
         public float length()
@@ -70,6 +78,11 @@ namespace RayTracingInOneWeekend
         public static Vector3 cross(Vector3 a, Vector3 b)
         {
             return new Vector3(a.y()*b.z() - a.z()*b.y(), a.x()*b.z()-a.z()*b.x(), a.x()*b.y()-a.y()*b.x());
+        }
+
+        public static Vector3 reflect(Vector3 i, Vector3 n)
+        {
+            return i - 2 * Vector3.dot(i, n) * n;
         }
 
         public string toString()
