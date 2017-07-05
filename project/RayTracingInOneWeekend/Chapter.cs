@@ -327,5 +327,85 @@ namespace RayTracingInOneWeekend
 
             return bmp;
         }
+
+        static public Bitmap ch9(int width, int height)
+        {
+            Bitmap bmp = new Bitmap(width, height);
+
+            float u, v;
+            int ir, ig, ib;
+            Vector3 col;
+
+            Hitable[] objList = new Hitable[5];
+            objList[0] = new Sphere(new Vector3(0, 0, -1), 0.5f, new Lambertian(new Vector3(.8f, .3f, .3f)));
+            objList[1] = new Sphere(new Vector3(0, -100.5f, -1), 100, new Lambertian(new Vector3(.8f, .8f, 0)));
+            objList[2] = new Sphere(new Vector3(1, 0, -1), 0.5f, new Metal(new Vector3(.8f, .6f, .2f)));
+            objList[3] = new Sphere(new Vector3(-1, 0, -1), 0.5f, new Dielectric(1.5f));
+            objList[4] = new Sphere(new Vector3(-1, 0, -1), -0.45f, new Dielectric(1.5f));
+            HitableList hitableList = new HitableList(objList);
+
+            Camera cam = new Camera();
+            int sampleCount = 100;
+            Random rdm = new Random(Guid.NewGuid().GetHashCode());
+
+            for (int j = 0; j < height; ++j)
+                for (int i = 0; i < width; ++i)
+                {
+                    col = new Vector3(0, 0, 0);
+                    for (int c = 0; c < sampleCount; ++c)
+                    {
+                        u = ((float)i + (float)rdm.NextDouble()) / (float)width;
+                        v = ((float)j + (float)rdm.NextDouble()) / (float)height;
+                        col += ch8_color(cam.getRay(u, v), hitableList, 50);
+                    }
+                    col /= (float)sampleCount;
+                    ir = (int)(col.r() * 255.99);
+                    ig = (int)(col.g() * 255.99);
+                    ib = (int)(col.b() * 255.99);
+                    bmp.SetPixel(i, height - j - 1, Color.FromArgb(ir, ig, ib));
+                }
+
+            return bmp;
+        }
+
+        static public Bitmap ch10(int width, int height)
+        {
+            Bitmap bmp = new Bitmap(width, height);
+
+            float u, v;
+            int ir, ig, ib;
+            Vector3 col;
+
+            Hitable[] objList = new Hitable[5];
+            objList[0] = new Sphere(new Vector3(0, 0, -1), 0.5f, new Lambertian(new Vector3(.8f, .3f, .3f)));
+            objList[1] = new Sphere(new Vector3(0, -100.5f, -1), 100, new Lambertian(new Vector3(.8f, .8f, 0)));
+            objList[2] = new Sphere(new Vector3(1, 0, -1), 0.5f, new Metal(new Vector3(.8f, .6f, .2f)));
+            objList[3] = new Sphere(new Vector3(-1, 0, -1), 0.5f, new Dielectric(1.5f));
+            objList[4] = new Sphere(new Vector3(-1, 0, -1), -0.45f, new Dielectric(1.5f));
+            HitableList hitableList = new HitableList(objList);
+
+            Camera cam = new Camera(new Vector3(-2,2,1), new Vector3(0,0,-1), new Vector3(0,1,0), 90, (float)width/(float)height);
+            int sampleCount = 10;
+            Random rdm = new Random(Guid.NewGuid().GetHashCode());
+
+            for (int j = 0; j < height; ++j)
+                for (int i = 0; i < width; ++i)
+                {
+                    col = new Vector3(0, 0, 0);
+                    for (int c = 0; c < sampleCount; ++c)
+                    {
+                        u = (float)(i + rdm.NextDouble()) / width;
+                        v = (float)(j + rdm.NextDouble()) / height;
+                        col += ch8_color(cam.getRay(u, v), hitableList, 10);
+                    }
+                    col /= (float)sampleCount;
+                    ir = (int)(col.r() * 255.99);
+                    ig = (int)(col.g() * 255.99);
+                    ib = (int)(col.b() * 255.99);
+                    bmp.SetPixel(i, height - j - 1, Color.FromArgb(ir, ig, ib));
+                }
+
+            return bmp;
+        }
     }
 }

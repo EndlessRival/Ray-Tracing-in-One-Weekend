@@ -77,12 +77,26 @@ namespace RayTracingInOneWeekend
 
         public static Vector3 cross(Vector3 a, Vector3 b)
         {
-            return new Vector3(a.y()*b.z() - a.z()*b.y(), a.x()*b.z()-a.z()*b.x(), a.x()*b.y()-a.y()*b.x());
+            return new Vector3(a.y()*b.z() - a.z()*b.y(), -a.x()*b.z()+a.z()*b.x(), a.x()*b.y()-a.y()*b.x());
         }
 
         public static Vector3 reflect(Vector3 i, Vector3 n)
         {
             return i - 2 * Vector3.dot(i, n) * n;
+        }
+
+        public static bool refract(Vector3 view, Vector3 normal, float nview_over_nt, ref Vector3 refracted)
+        {
+            Vector3 uv = view.normalized;
+            float dt = Vector3.dot(uv, normal);
+            float discriminant = 1.0f - nview_over_nt * nview_over_nt * (1 - dt*dt);
+            if (discriminant >= 0)
+            {
+                refracted = nview_over_nt * (uv - normal * dt) - normal * (float)Math.Sqrt(discriminant);
+                return true;
+            }
+            else
+                return false;
         }
 
         public string toString()
