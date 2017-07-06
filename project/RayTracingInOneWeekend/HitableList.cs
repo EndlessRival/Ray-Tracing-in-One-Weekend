@@ -17,6 +17,8 @@ namespace RayTracingInOneWeekend
             float closest_so_far = t_max;
             foreach(Hitable h in this.hitableList)
             {
+                if (h == null)
+                    continue;
                 if(h.hit(r, t_min, closest_so_far, ref temp_rec))
                 {
                     hit_something = true;
